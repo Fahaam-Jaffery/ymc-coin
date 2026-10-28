@@ -1,8 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
-  <title id="title">YMC draft mark</title><desc id="desc">Geometric Y symbol in electric blue and ice white.</desc>
-  <rect width="240" height="240" rx="48" fill="#0B1020"/>
-  <path d="M48 52h46l28 40 28-40h46l-74 101z" fill="#F3F6FC"/>
-  <path d="M94 52h46l-54 78-25-34z" fill="#168BFF"/>
-  <path d="M122 92l28-40h46l-74 101z" fill="#168BFF"/>
-  <path d="M119 153h28v35h-28z" fill="#00D5C8"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+<title id="title">YMC mark</title><desc id="desc">Minimal geometric Y mark.</desc>
+<rect width="64" height="64" rx="16" fill="#101828"/>
+<path d="M13 14h11l8 12 8-12h11L32 39 13 14Z" fill="#F8FAFC"/>
+<path d="M32 39h7v12h-7z" fill="#315EFB"/>
+<path d="M13 14h11l8 12-6 8L13 14Z" fill="#315EFB"/>
 </svg>
