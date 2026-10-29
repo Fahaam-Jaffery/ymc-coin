@@ -25,26 +25,32 @@ function SectionHeading({ eyebrow, title, text, light = false }: { eyebrow: stri
   return <div className="section-heading"><span className="eyebrow"><span className="eyebrow-dot" />{eyebrow}</span><h2 className={light ? "text-white" : ""}>{title}</h2>{text && <p>{text}</p>}</div>;
 }
 
+function YmcMark({ size = 28, className = "" }: { size?: number; className?: string }) {
+  return <svg className={className} width={size} height={size} viewBox="0 0 48 48" fill="none" aria-hidden="true">
+    <path d="M24 3.5 43 14.25v19.5L24 44.5 5 33.75v-19.5L24 3.5Z" stroke="currentColor" strokeOpacity=".48" strokeWidth="1.4"/>
+    <path d="M13 13.5 24 25l11-11.5M24 25v11" stroke="currentColor" strokeWidth="3.3" strokeLinecap="round" strokeLinejoin="round"/>
+    <circle cx="13" cy="13.5" r="2.4" fill="#45F0DC"/><circle cx="35" cy="13.5" r="2.4" fill="#5A8DFF"/><circle cx="24" cy="36" r="2.4" fill="#45F0DC"/>
+  </svg>;
+}
+
 function NetworkVisual() {
-  const nodes = [
-    { x: 50, y: 13, r: 5 }, { x: 76, y: 28, r: 4 }, { x: 85, y: 55, r: 5 },
-    { x: 69, y: 79, r: 4 }, { x: 39, y: 83, r: 5 }, { x: 17, y: 63, r: 4 },
-    { x: 18, y: 34, r: 5 }, { x: 50, y: 50, r: 8 }, { x: 49, y: 29, r: 3 },
-    { x: 32, y: 48, r: 3 }, { x: 65, y: 56, r: 3 }, { x: 50, y: 69, r: 3 }
+  const stages = [
+    { n: "01", title: "Transaction", detail: "Signed request", icon: <Wallet size={17} />, tone: "mint" },
+    { n: "02", title: "Execution", detail: "EVM target", icon: <Cpu size={17} />, tone: "blue" },
+    { n: "03", title: "Validator quorum", detail: "Proposed IBFT flow", icon: <ShieldCheck size={17} />, tone: "violet" },
+    { n: "04", title: "Finality", detail: "Receipt returned", icon: <Check size={17} />, tone: "mint" }
   ];
-  const edges = [[0,8],[8,1],[1,2],[2,10],[10,3],[3,4],[4,11],[11,5],[5,6],[6,9],[9,7],[7,8],[7,10],[7,11],[7,9],[0,6],[1,4],[2,5]];
-  return <div className="network-art" aria-label="Illustrative network topology diagram">
-    <div className="network-glow" />
-    <div className="orbit orbit-one" /><div className="orbit orbit-two" /><div className="orbit orbit-three" />
-    <svg viewBox="0 0 100 100" className="network-lines" aria-hidden="true">
-      {edges.map(([a,b], i) => <line key={i} x1={nodes[a].x} y1={nodes[a].y} x2={nodes[b].x} y2={nodes[b].y} className={i % 3 === 0 ? "edge edge-bright" : "edge"} />)}
-      {nodes.map((node,i) => <circle key={i} cx={node.x} cy={node.y} r={node.r} className={i === 7 ? "node node-core" : "node"} />)}
-    </svg>
-    <div className="network-center"><div className="center-mark">Y</div><span>YMC / L1</span></div>
-    <div className="network-label label-top"><span className="live-dot" /> SIMULATED TOPOLOGY</div>
-    <div className="network-label label-bottom"><span>12</span> sample nodes <i /> <span>18</span> links</div>
-    <div className="float-chip chip-left"><span className="chip-icon"><Layers3 size={15}/></span><div><small>Architecture</small><b>Independent L1</b></div></div>
-    <div className="float-chip chip-right"><span className="chip-icon blue"><ShieldCheck size={15}/></span><div><small>Consensus concept</small><b>DPoS + IBFT 2.0</b></div></div>
+  return <div className="hero-system" aria-label="Illustrative transaction path from submission through execution and validator quorum to finality">
+    <div className="system-card">
+      <div className="system-card-head"><span className="system-overline"><span className="live-dot" /> CONCEPTUAL NETWORK FLOW</span><span className="system-index">YMC / 01</span></div>
+      <div className="system-intro"><div className="system-mark"><YmcMark size={44}/></div><div><b>One path to finality.</b><p>How a transaction could move through the proposed stack.</p></div></div>
+      <div className="flow-stages">{stages.map((stage, i) => <div className="flow-stage-wrap" key={stage.n}>
+        <div className={`flow-stage ${stage.tone}`}><span className="flow-stage-icon">{stage.icon}</span><span className="flow-stage-copy"><small>{stage.n} / STAGE</small><b>{stage.title}</b><em>{stage.detail}</em></span><span className="flow-stage-state">{i === 3 ? "END" : "NEXT"}{i !== 3 && <ArrowDownRight size={13}/>}</span></div>
+        {i !== 3 && <div className="flow-connector"><i /></div>}
+      </div>)}</div>
+      <div className="system-card-foot"><span><span className="status-ring" /> PROPOSED ARCHITECTURE</span><span className="system-target"><b>1.2s</b> target block time*</span></div>
+    </div>
+    <div className="system-footnote"><span>*</span> Design target only — not measured, deployed, or live.</div>
   </div>;
 }
 
@@ -81,7 +87,7 @@ export default function App() {
     <div className="top-disclaimer"><span className="tiny-pulse" /> CONCEPT PROJECT <span className="disclaimer-divider">/</span> No live network or token contract</div>
     <header className="site-header">
       <div className="container flex h-[76px] items-center justify-between">
-        <a href="#home" className="brand" aria-label="YMC home"><span className="brand-symbol">Y</span><span className="brand-word">YMC<span>.</span><small>NETWORK CONCEPT</small></span></a>
+        <a href="#home" className="brand" aria-label="YMC home"><span className="brand-symbol"><YmcMark size={29}/></span><span className="brand-word">YMC<span>.</span><small>NETWORK CONCEPT</small></span></a>
         <nav className="desktop-nav" aria-label="Main navigation">
           <a href="#architecture">Architecture</a><a href="#explorer">Explore</a><a href="#tokenomics">Tokenomics</a><a href="#roadmap">Roadmap</a>
         </nav>
