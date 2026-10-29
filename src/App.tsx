@@ -143,7 +143,7 @@ export default function App() {
         <div className="container hero-layout">
           <div className="hero-copy">
             <div className="hero-kicker"><span className="kicker-line" /> A NEW LAYER OF POSSIBILITY <span className="kicker-index">001 / 004</span></div>
-            <h1>Built for<br/>what comes <span className="hero-type-wrap"><span className="gradient-text hero-typed-word" aria-hidden="true">{typedPhrase}</span><span className="typewriter-cursor" aria-hidden="true" /></span><span className="sr-only">next: decentralized, scalable, secure, and developer-first infrastructure.</span></h1>
+            <h1>Built for<br/>what comes<span className="hero-type-wrap"><span className="gradient-text hero-typed-word" aria-hidden="true">{typedPhrase}</span><span className="typewriter-cursor" aria-hidden="true" /></span><span className="sr-only">next: decentralized, scalable, secure, and developer-first infrastructure.</span></h1>
             <p className="hero-lead">A fresh take on Layer 1 infrastructure. Designed around useful applications, clear mechanics, and a developer experience that gets out of the way.</p>
             <div className="hero-actions"><Button size="lg" onClick={() => document.getElementById("architecture")?.scrollIntoView({ behavior: "smooth" })}>Explore the concept <ArrowRight size={17}/></Button><Button size="lg" variant="secondary" onClick={() => document.getElementById("developer")?.scrollIntoView({ behavior: "smooth" })}><Code2 size={17}/> Developer overview</Button></div>
             <div className="hero-footnote"><span className="footnote-icon"><CircleDot size={14}/></span><span>Early-stage concept. <b>Open by design.</b><br/><small>Specifications and performance figures are illustrative.</small></span></div>
