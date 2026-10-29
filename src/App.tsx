@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   ArrowDownRight, ArrowRight, ArrowUpRight, Blocks, Check, ChevronDown, CircleDot,
   Code2, Copy, Cpu, ExternalLink, GitBranch, Layers3, Menu, Network, ShieldCheck,
@@ -54,7 +54,47 @@ function NetworkVisual() {
   </div>;
 }
 
+const HERO_PHRASES = ["decentralized.", "scalable.", "secure.", "developer-first."];
+
 export default function App() {
+  const [typedPhrase, setTypedPhrase] = useState("decentralized.");
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) {
+      setTypedPhrase("decentralized.");
+      return;
+    }
+    let phraseIndex = 0;
+    let charIndex = HERO_PHRASES[0].length;
+    let deleting = true;
+    let timeoutId: number;
+    const tick = () => {
+      const phrase = HERO_PHRASES[phraseIndex];
+      if (deleting) {
+        charIndex = Math.max(0, charIndex - 1);
+        setTypedPhrase(phrase.slice(0, charIndex));
+        if (charIndex === 0) {
+          deleting = false;
+          phraseIndex = (phraseIndex + 1) % HERO_PHRASES.length;
+          timeoutId = window.setTimeout(tick, 260);
+          return;
+        }
+        timeoutId = window.setTimeout(tick, 42);
+        return;
+      }
+      const nextPhrase = HERO_PHRASES[phraseIndex];
+      charIndex = Math.min(nextPhrase.length, charIndex + 1);
+      setTypedPhrase(nextPhrase.slice(0, charIndex));
+      if (charIndex === nextPhrase.length) {
+        deleting = true;
+        timeoutId = window.setTimeout(tick, 1450);
+      } else {
+        timeoutId = window.setTimeout(tick, 72);
+      }
+    };
+    timeoutId = window.setTimeout(tick, 1450);
+    return () => window.clearTimeout(timeoutId);
+  }, []);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [txRate, setTxRate] = useState(1800);
   const [capacity, setCapacity] = useState(3500);
@@ -103,7 +143,7 @@ export default function App() {
         <div className="container hero-layout">
           <div className="hero-copy">
             <div className="hero-kicker"><span className="kicker-line" /> A NEW LAYER OF POSSIBILITY <span className="kicker-index">001 / 004</span></div>
-            <h1>Built for<br/>what comes <span className="gradient-text">next.</span></h1>
+            <h1>Built for<br/>what comes <span className="hero-type-wrap"><span className="gradient-text hero-typed-word" aria-hidden="true">{typedPhrase}</span><span className="typewriter-cursor" aria-hidden="true" /></span><span className="sr-only">Built for what comes next: decentralized, scalable, secure, and developer-first infrastructure.</span></h1>
             <p className="hero-lead">A fresh take on Layer 1 infrastructure. Designed around useful applications, clear mechanics, and a developer experience that gets out of the way.</p>
             <div className="hero-actions"><Button size="lg" onClick={() => document.getElementById("architecture")?.scrollIntoView({ behavior: "smooth" })}>Explore the concept <ArrowRight size={17}/></Button><Button size="lg" variant="secondary" onClick={() => document.getElementById("developer")?.scrollIntoView({ behavior: "smooth" })}><Code2 size={17}/> Developer overview</Button></div>
             <div className="hero-footnote"><span className="footnote-icon"><CircleDot size={14}/></span><span>Early-stage concept. <b>Open by design.</b><br/><small>Specifications and performance figures are illustrative.</small></span></div>
