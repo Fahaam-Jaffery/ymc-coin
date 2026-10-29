@@ -263,7 +263,7 @@
     ['03 / Quorum', 'Under the proposed IBFT 2.0 direction, validators would exchange votes and seek the protocol-defined quorum. Safety and liveness depend on membership, network assumptions, and implementation correctness.'],
     ['04 / Finality', 'After the required protocol conditions are met, a client could receive a transaction receipt. No YMC block production, transaction receipt, or finality service currently exists.']
   ];
-  const traceButtons = $('.trace-step');
+  const traceButtons = Array.from(document.querySelectorAll('.trace-step'));
   function selectTrace(index) {
     traceButtons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
     $('#trace-description').textContent = traceContent[index][1];
@@ -272,7 +272,7 @@
   traceButtons.forEach((button, index) => button.addEventListener('click', () => selectTrace(index)));
 
   // Synchronize allocation row selection with the proportional strip.
-  const allocationRows = $('.allocation[data-allocation]');
+  const allocationRows = Array.from(document.querySelectorAll('.allocation[data-allocation]'));
   const supplyCard = $('.supply-card');
   function selectAllocation(index) {
     allocationRows.forEach((row, i) => {
