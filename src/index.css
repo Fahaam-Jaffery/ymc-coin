@@ -55,8 +55,12 @@ a { color: inherit; text-decoration: none; }
 .kicker-index { margin-left: 12px; color: #455b64; }
 .hero-copy h1 { margin: 26px 0 20px; font-size: clamp(54px, 6.4vw, 82px); line-height: .99; letter-spacing: -.075em; font-weight: 600; }
 .gradient-text { background: linear-gradient(100deg,#45f0dc 5%,#7ac7fa 60%,#9f9dff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.hero-type-wrap { display: inline; white-space: normal; }
-.hero-typed-word { overflow-wrap: anywhere; }
+.hero-type-wrap {
+  display: block; min-height: 1em; width: 100%;
+  margin-top: .06em; white-space: nowrap;
+  font-size: .68em; line-height: 1.18; letter-spacing: -.055em;
+}
+.hero-typed-word { display: inline-block; white-space: nowrap; }
 .typewriter-cursor {
   display: inline-block; width: 3px; height: .78em; margin-left: .08em;
   vertical-align: -.035em; border-radius: 2px;
